@@ -83,9 +83,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.16.6/lodash.min.js"></script>
 <script>
     "use strict";
-    var access_token = 'EAACEdEose0cBAOqUCEEdaQZADVOsy6yi17QkDX0LSDJh15wPZBYCZATpDaOfI8o7pJDr2rC0NyKJvbuBNR3cKLA8swBvEx1JuLrVi9HwuQvjVCw5xLaabQOLYkzzXFC35EZAX0gNtzmZBoQRjtZCwyFH62pC4niwP4W4Pr7H0DQheZCKijR8wu5b1DpJ32LtN8ZD'; //Paste your Access Token here
+    var access_token = 'EAACEdEose0cBAEoUZC9TxrtRrCM12IOvRZADPQEOayZBkllZCu3SndfZBR2B57OQ4qdiGuaHZBDsZBpYFHoKu9Ovhf9s93pKj9n0VtLL0GW7qcWPKQwbidZCeoUa9vjQp8M6twTjNSH7Ny2QApZCPaZBgYHsSTuOCaMzKJVDaZCcVgPtV86GcbpAPruILUb8tBpQLkZD'; //Paste your Access Token here
     var pageID = '1846557839001690'; //Paste your Facebook Page ID here
-    var postID = '1846563179001156'; //Paste your live's Post ID here
+    var postID = '1846904085633732'; //Paste your live's Post ID here
 
     var refreshTime = 5; // in seconds
     var defaultCount = 0; // default count to start with
@@ -104,6 +104,7 @@
 
     function refreshCounts() {
             var url = 'https://graph.facebook.com/v2.8/?ids=' + pageID + "_" + postID + '&fields=' + reactions + '&access_token=' + access_token;
+            console.log(url);
     	$.getJSON(url, function(res){
     		v1.text(defaultCount + res[postID].reactions_like.summary.total_count);
     		v2.text(defaultCount + res[postID].reactions_love.summary.total_count);
