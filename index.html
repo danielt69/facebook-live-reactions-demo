@@ -107,16 +107,16 @@
             console.log(url);
     	$.getJSON(url, function(res){
             console.log(res)
-    		v1.text(defaultCount + res[pageID + '_' + postID].reactions_like.summary.total_count);
+    		v1.text(defaultCount + res[pageID + '_' + pageID].reactions_like.summary.total_count);
     		v2.text(defaultCount + res[pageID + '_' + postID].reactions_love.summary.total_count);
             v3.text(defaultCount + res[pageID + '_' + postID].reactions_sad.summary.total_count);
             v4.text(defaultCount + res[pageID + '_' + postID].reactions_haha.summary.total_count);
             v5.text(defaultCount + res[pageID + '_' + postID].reactions_angry.summary.total_count);
             v6.text(defaultCount + res[pageID + '_' + postID].reactions_wow.summary.total_count);
-    	}).done(function() {
+    	}).done(function(res) {
             console.log(res);
         })
-        .fail(function() {
+        .fail(function(res) {
             console.log( "error getting data!" );
             console.log(res);
         });
