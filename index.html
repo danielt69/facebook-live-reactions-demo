@@ -36,13 +36,13 @@
 		}
         .tc { text-align: center; font-size: 3rem; font-weight: bold; }
         .wf { width: 28%; }
-        .likes {
+        .like {
             position: absolute;
             top: 20%;
             left: 5%;
         }
 
-        .happy {
+        .love {
             position: absolute;
             top: 47.5%;
             left: 5%;
@@ -53,7 +53,7 @@
             top: 77.5%;
             left: 5%;
         }
-        .fml {
+        .haha {
             position: absolute;
             top: 20%;
             right: 10%;
@@ -63,7 +63,7 @@
             top: 48%;
             right: 10%;
         }
-        .shock {
+        .wow {
             position: absolute;
             top: 77.5%;
             right: 10%;
@@ -72,12 +72,12 @@
 </head>
 <body>
 
-	<div class="tc wf likes"></div>
-    <div class="tc wf happy"></div>
+	<div class="tc wf like"></div>
+    <div class="tc wf love"></div>
     <div class="tc wf sad"></div>
-    <div class="tc wf fml"></div>
+    <div class="tc wf haha"></div>
     <div class="tc wf angry"></div>
-    <div class="tc wf shock"></div>
+    <div class="tc wf wow"></div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.16.6/lodash.min.js"></script>
@@ -95,12 +95,12 @@
         return 'reactions.type(' + e + ').limit(0).summary(total_count).as(' + code + ')'
     }).join(',');
 
-    var	v1 = $('.likes'),
-    	v2 = $('.happy'),
+    var	v1 = $('.like'),
+    	v2 = $('.love'),
         v3 = $('.sad'),
-        v4 = $('.fml'),
+        v4 = $('.haha'),
         v5 = $('.angry'),
-        v6 = $('.shock');
+        v6 = $('.wow');
 
     function refreshCounts() {
             var url = 'https://graph.facebook.com/v2.8/?ids=' + pageID + "_" + postID + '&fields=' + reactions + '&access_token=' + access_token;
