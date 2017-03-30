@@ -1,39 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<title>Facebook Reactions</title>
-	<style>
-		html {
-		  box-sizing: border-box;
+    <meta charset="UTF-8">
+    <title>Facebook Reactions</title>
+    <style>
+        html {
+          box-sizing: border-box;
           width: 100%;
           height: 100%;
-		}
-		*, *:before, *:after {
-		  box-sizing: inherit;
-		}
-		body{
-			margin: 0;
+        }
+        *, *:before, *:after {
+          box-sizing: inherit;
+        }
+        body{
+            margin: 0;
             background:url('./background.jpg') no-repeat; /* IMAGE NAME HERE */
             color: #FFF;
             width: 100%;
             height: 100%;
-		}
-		#wrap{
-			position: relative;
-			margin: 0px auto;
-			width: 1280px;
-			height: 720px;
-		}
-		.cover{
-			padding: 20px 80px;
-			position: absolute;
-			width: 1280px;
-			height: 720px;
-			top: 0;
-			left: 0;
-			z-index: 10;
-		}
+        }
+        #wrap{
+            position: relative;
+            margin: 0px auto;
+            width: 1280px;
+            height: 720px;
+        }
+        .cover{
+            padding: 20px 80px;
+            position: absolute;
+            width: 1280px;
+            height: 720px;
+            top: 0;
+            left: 0;
+            z-index: 10;
+        }
         .tc { text-align: center; font-size: 3rem; font-weight: bold; }
         .wf { width: 28%; }
         .like {
@@ -68,11 +68,11 @@
             top: 77.5%;
             right: 10%;
         }
-	</style>
+    </style>
 </head>
 <body>
 
-	<div class="tc wf like"></div>
+    <div class="tc wf like"></div>
     <div class="tc wf love"></div>
     <div class="tc wf sad"></div>
     <div class="tc wf haha"></div>
@@ -80,11 +80,11 @@
     <div class="tc wf wow"></div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.16.6/lodash.min.js"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.16.6/lodash.min.js"></script> -->
 <script>
     "use strict";
     var access_token = 'EAACEdEose0cBAEoUZC9TxrtRrCM12IOvRZADPQEOayZBkllZCu3SndfZBR2B57OQ4qdiGuaHZBDsZBpYFHoKu9Ovhf9s93pKj9n0VtLL0GW7qcWPKQwbidZCeoUa9vjQp8M6twTjNSH7Ny2QApZCPaZBgYHsSTuOCaMzKJVDaZCcVgPtV86GcbpAPruILUb8tBpQLkZD'; //Paste your Access Token here
-    var pageID = '1846557839001690'; //Paste your Facebook Page ID here
+    // var pageID = '1846557839001690'; //Paste your Facebook Page ID here
     var postID = '1846904085633732'; //Paste your live's Post ID here
 
     var refreshTime = 5; // in seconds
@@ -95,25 +95,25 @@
         return 'reactions.type(' + e + ').limit(0).summary(total_count).as(' + code + ')'
     }).join(',');
 
-    var	v1 = $('.like'),
-    	v2 = $('.love'),
+    var v1 = $('.like'),
+        v2 = $('.love'),
         v3 = $('.sad'),
         v4 = $('.haha'),
         v5 = $('.angry'),
         v6 = $('.wow');
 
     function refreshCounts() {
-            var url = 'https://graph.facebook.com/v2.8/?ids=' + pageID + "_" + postID + '&fields=' + reactions + '&access_token=' + access_token;
+            var url = 'https://graph.facebook.com/v2.8/?ids=' + postID + '&fields=' + reactions + '&access_token=' + access_token;
             console.log(url);
-    	$.getJSON(url, function(res){
+        $.getJSON(url, function(res){
             console.log(res)
-    		v1.text(defaultCount + res[pageID + '_' + postID].reactions_like.summary.total_count);
-    		v2.text(defaultCount + res[pageID + '_' + postID].reactions_love.summary.total_count);
-            v3.text(defaultCount + res[pageID + '_' + postID].reactions_sad.summary.total_count);
-            v4.text(defaultCount + res[pageID + '_' + postID].reactions_haha.summary.total_count);
-            v5.text(defaultCount + res[pageID + '_' + postID].reactions_angry.summary.total_count);
-            v6.text(defaultCount + res[pageID + '_' + postID].reactions_wow.summary.total_count);
-    	}).done(function(res) {
+            v1.text(defaultCount + res[postID].reactions_like.summary.total_count);
+            v2.text(defaultCount + res[postID].reactions_love.summary.total_count);
+            v3.text(defaultCount + res[postID].reactions_sad.summary.total_count);
+            v4.text(defaultCount + res[postID].reactions_haha.summary.total_count);
+            v5.text(defaultCount + res[postID].reactions_angry.summary.total_count);
+            v6.text(defaultCount + res[postID].reactions_wow.summary.total_count);
+        }).done(function(res) {
             console.log(res);
         })
         .fail(function(res) {
