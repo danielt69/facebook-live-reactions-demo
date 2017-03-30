@@ -1,0 +1,99 @@
+﻿<!-- CONFIG - by SocialWall.me
+1/ Update your Background (:16)
+2/ Update your Logo (:87)
+3/ Update your Title (:88)
+4/ Update your Access Token (:105)
+5/ Update your Post ID (:106) -->
+<!-- Original source code: https://gist.github.com/anonymous/7073ea6c601f28aa65e5a077ef875526 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>My Facebook Reactions - SocialWall.me</title>
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,900" rel="stylesheet">
+	<style>
+        body { font-family: 'Lato', sans-serif; }
+        img {max-width: 100%; }
+        footer { background: rgba(0, 0, 0, 0.6); position: fixed; left: 0; bottom: 0; width: 100%; display: flex; align-items: center; justify-content: space-between; padding: 0 30px; box-sizing: border-box;}
+        .question { color: #f8bd0b; font-size: 40px; font-weight: 900; padding: 110px 30px 30px; text-align: center;}
+        .competitor { position: relative; border: 8px solid #f8bd0b; border-radius: 5px; margin: 25px 0; }
+        .tc { display: inline-block; position: absolute; left: 100%; top: 10%; line-height: 60px; background: #f8bd0b; border-radius: 0px 50px 50px 0px;}
+        .right .tc { left: auto; right: 100%; border-radius: 50px 0px 0px 50px;}
+        .emoji { display: inline-block; width: 80px; height: auto; position: absolute; left: 0; top: 0; transform: translateX(-50%); }
+        .right .emoji { left: auto; right: 0; transform: translateX(50%); }
+        .counter { float: right; color: black; font-size: 60px; font-weight: 900; line-height: 80px; padding: 0 15px; margin-left: 30px; }
+        .right .counter { float: left; margin-right: 30px; margin-left: 0px; }
+	</style>
+</head>
+<body>
+    <header>
+    </header>
+	
+	
+	<footer>
+        <div class="competitor left">
+            <img src="img/Star560.jpg" alt="">
+            <div class="tc wf love">    <!-- like love sad haha angry wow -->
+                <img class="emoji" src="emojis/love.png">
+                <span class="counter">0</span>
+            </div>
+        </div>
+        <div class="question">Who is better fot man UTD?</div>
+        <div class="competitor right">
+            <img src="img/Gonzo560.jpg" alt="">
+            <div class="tc wf haha">  <!-- like love sad haha angry wow -->
+                <img class="emoji" src="emojis/haha.png">
+                <span class="counter">0</span>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+    <script>
+    "use strict";
+    var access_token = 'EAACEdEose0cBAEoUZC9TxrtRrCM12IOvRZADPQEOayZBkllZCu3SndfZBR2B57OQ4qdiGuaHZBDsZBpYFHoKu9Ovhf9s93pKj9n0VtLL0GW7qcWPKQwbidZCeoUa9vjQp8M6twTjNSH7Ny2QApZCPaZBgYHsSTuOCaMzKJVDaZCcVgPtV86GcbpAPruILUb8tBpQLkZD'; //Paste your Access Token here
+    // var pageID = '1846557839001690'; //Paste your Facebook Page ID here
+    var postID = '1846904085633732'; //Paste your live's Post ID here
+    var refreshTime = 5; // Refresh time in seconds
+    var defaultCount = 0; // Default count to start with
+
+    var reactions = ['LIKE', 'LOVE', 'WOW', 'HAHA', 'SAD', 'ANGRY'].map(function (e) {
+        var code = 'reactions_' + e.toLowerCase();
+        return 'reactions.type(' + e + ').limit(0).summary(total_count).as(' + code + ')'
+    }).join(',');
+
+    var v1 = $('.like .counter'),
+        v2 = $('.love .counter'),
+        v3 = $('.sad .counter'),
+        v4 = $('.haha .counter'),
+        v5 = $('.angry .counter'),
+        v6 = $('.wow .counter');
+
+    function refreshCounts() {
+            var url = 'https://graph.facebook.com/v2.8/?ids=' + postID + '&fields=' + reactions + '&access_token=' + access_token;
+            console.log(url);
+        $.getJSON(url, function(res){
+            console.log(res)
+            v1.text(defaultCount + res[postID].reactions_like.summary.total_count);
+            v2.text(defaultCount + res[postID].reactions_love.summary.total_count);
+            v3.text(defaultCount + res[postID].reactions_sad.summary.total_count);
+            v4.text(defaultCount + res[postID].reactions_haha.summary.total_count);
+            v5.text(defaultCount + res[postID].reactions_angry.summary.total_count);
+            v6.text(defaultCount + res[postID].reactions_wow.summary.total_count);
+        }).done(function(res) {
+            console.log(res);
+        })
+        .fail(function(res) {
+            console.log( "error getting data!" );
+            console.log(res);
+        });
+    }
+
+    $(document).ready(function(){
+        setInterval(refreshCounts, refreshTime * 1000);
+        refreshCounts();
+    });
+    </script>
+</body>
+</html>
